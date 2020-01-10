@@ -33,8 +33,15 @@ namespace pluralsight_courses.Domain
                     .GetAllCourses()
                     .First(course => course.CourseId == courseId);
             
-            course.AppliedUsers.Add(user);
+            if(!CheckIfUserHasAlreadyApplied(user,course)) course.AppliedUsers.Add(user);
         }
+
+        private bool CheckIfUserHasAlreadyApplied(User user, Course course)
+            =>
+                course
+                    .AppliedUsers
+                    .Any(appliedUser => appliedUser.Id == user.Id);
+        
         /// <summary>
         /// Fills course repository with data
         /// </summary>

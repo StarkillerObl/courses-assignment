@@ -9,7 +9,7 @@ namespace pluralsight_courses.Domain
         public User Author { get; }
         public string Title { get; }
         public TimeSpan Duration { get; }
-        public List<User> AppliedUsers = new List<User>();
+        public List<User> AppliedUsers { get; } = new List<User>();
 
         public Course(
             Guid courseId,
