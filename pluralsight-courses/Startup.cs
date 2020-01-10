@@ -21,7 +21,10 @@ namespace pluralsight_courses
                 options =>options.EnableEndpointRouting=false); //If I remember correctly this is required since Asp.Net Core 3
 
             services.AddSingleton<IUsersRepository, InMemoryUsersRepository>(); //the data is currently "persisted" in memory so this has to be a singleton
-            services.AddScoped<ICoursesService, CoursesService>();
+            services.AddSingleton<ICoursesRepository, InMemoryCoursesRepository>();
+            services.AddSingleton<ICoursesService, CoursesService>(); //Because I have decided to fill course data using this service
+                                                                      //I have to create it as a singleton
+                                                                      //(in other case the course data would be added with every request
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using pluralsight_courses.Domain;
 
 namespace pluralsight_courses.Controllers
 {
@@ -7,11 +10,21 @@ namespace pluralsight_courses.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-        //private ICoursesService _coursesService;
-        [HttpGet("hello")]
-        public async Task<ActionResult<string>> Hello()
+        private ICoursesRepository _coursesRepository;
+        private ICoursesService _coursesService;
+
+        public CoursesController(
+            ICoursesRepository coursesRepository,
+            ICoursesService coursesService)
         {
-            return Ok("Hello");
+            _coursesRepository = coursesRepository;
+            _coursesService = coursesService;
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Course>> GetAllCourses()
+            => _coursesRepository
+                .GetAllCourses()
+                .ToList();
     }
 }
