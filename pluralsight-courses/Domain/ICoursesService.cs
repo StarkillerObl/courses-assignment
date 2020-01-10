@@ -4,6 +4,6 @@ namespace pluralsight_courses.Domain
 {
     public interface ICoursesService
     {
-        bool Apply(Guid courseId, Guid userId);
+        void Apply(Guid courseId, Guid userId);
     }
 }

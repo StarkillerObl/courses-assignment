@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using pluralsight_courses.Domain;
+using pluralsight_courses.Dto;
 
 namespace pluralsight_courses.Controllers
 {
@@ -26,5 +29,35 @@ namespace pluralsight_courses.Controllers
             => _coursesRepository
                 .GetAllCourses()
                 .ToList();
+
+        [HttpPost("{courseid}/apply")]
+        public ActionResult ApplyForCourse(
+            [FromRoute] Guid courseid,
+            [FromBody] ApplyForCourseDto dto)
+        {
+            try
+            {
+                _coursesService
+                    .Apply(courseid, dto.UserId);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return Problem();
+            }
+
+            return Ok();
+        }
+
+        [HttpGet("{courseid}/getapplied")]
+        public ActionResult<IEnumerable<User>> GetAppliedUsers([FromRoute] Guid courseId)
+        =>
+            _coursesRepository
+                .GetAllCourses()
+                .First(course => course.CourseId == courseId)
+                .AppliedUsers;
     }
 }

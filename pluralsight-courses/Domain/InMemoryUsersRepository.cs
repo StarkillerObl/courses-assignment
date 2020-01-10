@@ -10,11 +10,11 @@ namespace pluralsight_courses.Domain
         private List<User> _users = new List<User>()
         {
             new User(
-                Guid.NewGuid(),
+                Guid.Parse("456c5e31-b593-4076-aa24-0423a9d63438"),
                 "John",
                 "Xyz"),
             new User(
-                Guid.NewGuid(),
+                Guid.Parse("211b8f83-b3a5-4e23-9edf-d7c4c9ed18f9"),
                 "Anna",
                 "Zyx"),
             new User(

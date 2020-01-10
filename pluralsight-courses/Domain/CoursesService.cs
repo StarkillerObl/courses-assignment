@@ -17,14 +17,27 @@ namespace pluralsight_courses.Domain
             _userRepository = userRepository;
             Initialize();
         }
-        public bool Apply(Guid courseId, Guid userId)
+        public void Apply(Guid courseId, Guid userId)
         {
+            //basic guard clauses
             if(!_coursesRepository.CourseExists(courseId)) throw new ArgumentException();
             if(!_userRepository.UserExists(userId)) throw new ArgumentException();
-            
-            throw new NotImplementedException();
-        }
 
+            var user =
+                _userRepository
+                    .GetAllUsers()
+                    .First(user => user.Id == userId);
+
+            var course =
+                _coursesRepository
+                    .GetAllCourses()
+                    .First(course => course.CourseId == courseId);
+            
+            course.AppliedUsers.Add(user);
+        }
+        /// <summary>
+        /// Fills course repository with data
+        /// </summary>
         private void Initialize()
         {
             void AddNigelPoultonCourses()
@@ -37,13 +50,13 @@ namespace pluralsight_courses.Domain
 
                 _coursesRepository.AddCourse(
                     new Course(
-                        Guid.NewGuid(),
+                        Guid.Parse("9d401e07-3018-4aef-a62e-ca0ec308e59e"),
                         author,
                         "Docker Deep Dive",
                         new TimeSpan(4, 40, 0)));
                 _coursesRepository.AddCourse(
                     new Course(
-                        Guid.NewGuid(),
+                        Guid.Parse("0a5bbe6a-424d-40c5-82ef-55e221d754b1"),
                         author,
                         "Docker and Kubernetes: The Big Picture",
                         new TimeSpan(1,47,0)));
@@ -58,12 +71,11 @@ namespace pluralsight_courses.Domain
                 
                 _coursesRepository.AddCourse(
                     new Course(
-                        Guid.NewGuid(),
+                        Guid.Parse("1025d48c-8004-4115-96fc-f94e96382d41"),
                         author,
                         "Making Your C# COde More Functional",
                         new TimeSpan(3,54,0)));
             }
-
             void AddJasonRobertsCourses()
             {
                 var author =
@@ -74,13 +86,13 @@ namespace pluralsight_courses.Domain
                 
                 _coursesRepository.AddCourse(
                     new Course(
-                        Guid.NewGuid(),
+                        Guid.Parse("37f80df6-ca68-4860-a7d0-21df29cdbd5f"),
                         author,
                         "Building Concurrent Applications with the Actor Model in Akka.NET",
                         new TimeSpan(3,23,0)));
                 _coursesRepository.AddCourse(
                     new Course(
-                        Guid.NewGuid(),
+                        Guid.Parse("580f3c04-c5fb-4006-af6d-751cc3228a80"),
                         author,
                         "Building Reactive Concurrent WPF Applications with Akka.NET",
                         new TimeSpan(1,31,0)));
