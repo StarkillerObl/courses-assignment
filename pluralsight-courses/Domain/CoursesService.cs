@@ -23,17 +23,12 @@ namespace pluralsight_courses.Domain
             if(!_coursesRepository.CourseExists(courseId)) throw new ArgumentException();
             if(!_userRepository.UserExists(userId)) throw new ArgumentException();
 
-            var user =
-                _userRepository
-                    .GetAllUsers()
-                    .First(user => user.Id == userId);
+            var user = _userRepository.FindById(userId);
+            var course = _coursesRepository.FindById(courseId);
 
-            var course =
-                _coursesRepository
-                    .GetAllCourses()
-                    .First(course => course.CourseId == courseId);
-            
-            if(!CheckIfUserHasAlreadyApplied(user,course)) course.AppliedUsers.Add(user);
+            //this prevents the user from applying multiple times
+            //I could also consider throwing something like UserAlreadyAppliedException in this case
+            if(!CheckIfUserHasAlreadyApplied(user,course)) course.AppliedUsers.Add(user); 
         }
 
         private bool CheckIfUserHasAlreadyApplied(User user, Course course)
@@ -51,9 +46,7 @@ namespace pluralsight_courses.Domain
             {
                 var author =
                     _userRepository
-                        .GetAllUsers()
-                        .First(user => user.FirstName == "Nigel" 
-                                       && user.LastName == "Poulton");
+                        .FindByFirstAndLastName("Nigel","Poulton");
 
                 _coursesRepository.AddCourse(
                     new Course(
@@ -72,9 +65,7 @@ namespace pluralsight_courses.Domain
             {
                 var author =
                     _userRepository
-                        .GetAllUsers()
-                        .First(user => user.FirstName == "Zoran"
-                                       && user.LastName == "Horvat");
+                        .FindByFirstAndLastName("Zoran", "Horvat");
                 
                 _coursesRepository.AddCourse(
                     new Course(
@@ -87,10 +78,8 @@ namespace pluralsight_courses.Domain
             {
                 var author =
                     _userRepository
-                        .GetAllUsers()
-                        .First(user => user.FirstName == "Jason"
-                                       && user.LastName == "Roberts");
-                
+                        .FindByFirstAndLastName("Jason","Roberts");
+
                 _coursesRepository.AddCourse(
                     new Course(
                         Guid.Parse("37f80df6-ca68-4860-a7d0-21df29cdbd5f"),

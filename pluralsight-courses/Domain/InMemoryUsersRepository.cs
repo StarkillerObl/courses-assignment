@@ -37,5 +37,17 @@ namespace pluralsight_courses.Domain
             =>
                 _users
                     .Any(user => user.Id == id);
+
+        public User FindById(Guid userId)
+            =>
+                _users
+                    .First(user => user.Id == userId);
+
+        public User FindByFirstAndLastName(string firstName, string lastName)
+            =>
+                _users
+                    .First(user =>
+                        user.FirstName == firstName &&
+                        user.LastName == lastName);
     }
 }

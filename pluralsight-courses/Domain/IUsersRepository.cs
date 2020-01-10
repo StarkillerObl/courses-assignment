@@ -9,5 +9,7 @@ namespace pluralsight_courses.Domain
     {
         IEnumerable<User> GetAllUsers();
         bool UserExists(Guid id);
+        User FindById(Guid userId);
+        User FindByFirstAndLastName(string firstName, string lastName);
     }
 }

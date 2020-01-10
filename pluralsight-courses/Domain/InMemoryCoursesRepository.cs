@@ -18,5 +18,9 @@ namespace pluralsight_courses.Domain
             =>
                 _courses
                     .Any(course => course.CourseId == id);
+
+        public Course FindById(Guid id)
+            => _courses
+                .First(course => course.CourseId == id);
     }
 }

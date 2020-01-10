@@ -9,5 +9,6 @@ namespace pluralsight_courses.Domain
         IEnumerable<Course> GetAllCourses();
         void AddCourse(Course course);
         bool CourseExists(Guid id);
+        Course FindById(Guid id);
     }
 }
