@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pluralsight-courses", "pluralsight-courses\pluralsight-courses.csproj", "{BF997C2C-F573-4A5F-A558-3AD22D480551}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF997C2C-F573-4A5F-A558-3AD22D480551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF997C2C-F573-4A5F-A558-3AD22D480551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF997C2C-F573-4A5F-A558-3AD22D480551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF997C2C-F573-4A5F-A558-3AD22D480551}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
